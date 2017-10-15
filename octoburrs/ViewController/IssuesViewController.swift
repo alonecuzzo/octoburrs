@@ -12,7 +12,6 @@ import RxSwift
 import RxCocoa
 
 
-
 class IssuesViewController: UIViewController {
   
   //MARK: Property
@@ -44,6 +43,8 @@ class IssuesViewController: UIViewController {
     super.viewDidLoad()
     view.backgroundColor = .orange
     
+    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(addButtonTapped))
+    
     tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
     view.addSubview(tableView)
     
@@ -59,5 +60,10 @@ class IssuesViewController: UIViewController {
     tableView.rx.modelSelected(Issue.self).subscribe(onNext: { issue in
       
     }).disposed(by: disposeBag)
+  }
+  
+  @objc func addButtonTapped(sender: Any?) {
+    let vc = CreateIssueViewController()
+    navigationController?.pushViewController(vc, animated: true)
   }
 }

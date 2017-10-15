@@ -20,7 +20,7 @@ class RepositoryViewController: UIViewController {
   private let viewModel: RepositoryViewModel
   private let disposeBag = DisposeBag()
   private var repositories: Observable<[Repository]> { return viewModel.repositories.asObservable() }
-  private let cellIdentifier = "afsdf"
+  private let cellIdentifier = "RepositoryViewController.cellIdentifier"
   
   
   //MARK: Method
@@ -40,7 +40,6 @@ class RepositoryViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = .orange
     
     tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
     view.addSubview(tableView)
@@ -56,6 +55,7 @@ class RepositoryViewController: UIViewController {
     
     tableView.rx.modelSelected(Repository.self).subscribe(onNext: { [weak self] repository in
       guard let repoName = repository.name else { return }
+      //TODO: pass the token around - dont hardcode!
       let service = OctoIssuesService("e5e1263d0febf38385a334250e4afbf2dae51587")
       let vm = IssuesViewModel(service: service)
       let ivc = IssuesViewController(viewModel: vm, repoName: repoName)

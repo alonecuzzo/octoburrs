@@ -9,6 +9,7 @@ target 'octoburrs' do
   pod 'OctoKit.swift', '~> 0.7'
   pod 'RxSwift', '4.0.0-rc.0'
   pod 'RxDataSources', '3.0.0-rc.0'
+  pod 'SnapKit', '~> 4.0'
 
   target 'octoburrsTests' do
     inherit! :search_paths
