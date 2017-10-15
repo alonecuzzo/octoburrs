@@ -28,6 +28,7 @@ class IssuesViewController: UIViewController {
     self.viewModel = viewModel
     self.repoName = repoName
     super.init(nibName: nil, bundle: nil)
+    navigationItem.title = "Issues"
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -58,7 +59,7 @@ class IssuesViewController: UIViewController {
       }.disposed(by: disposeBag)
     
     tableView.rx.modelSelected(Issue.self).subscribe(onNext: { issue in
-      
+
     }).disposed(by: disposeBag)
   }
   

@@ -27,6 +27,7 @@ class RepositoryViewController: UIViewController {
   required init(viewModel: RepositoryViewModel) {
     self.viewModel = viewModel
     super.init(nibName: nil, bundle: nil)
+    navigationItem.title = "Repositories"
   }
   
   required init?(coder aDecoder: NSCoder) {

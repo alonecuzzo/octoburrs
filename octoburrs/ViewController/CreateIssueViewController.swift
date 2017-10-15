@@ -20,6 +20,7 @@ class CreateIssueViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    navigationItem.title = "New Issue"
     view.backgroundColor = .orange
   }
 }
