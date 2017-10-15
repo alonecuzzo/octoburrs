@@ -74,6 +74,13 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
+		06B76EAA1F93E9C80021FC72 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		06EEE3111F93DFE20073A07D = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +104,7 @@
 		06EEE31C1F93DFE20073A07D /* octoburrs */ = {
 			isa = PBXGroup;
 			children = (
+				06B76EAA1F93E9C80021FC72 /* ViewModel */,
 				06B76EA71F93E8A40021FC72 /* ViewController */,
 				06EEE31D1F93DFE20073A07D /* AppDelegate.swift */,
 				06EEE3211F93DFE20073A07D /* Main.storyboard */,
@@ -514,6 +522,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HRC7JV624Y;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
 				INFOPLIST_FILE = octoburrs/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ai.theowl.octoburrs;
@@ -530,6 +540,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HRC7JV624Y;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
 				INFOPLIST_FILE = octoburrs/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ai.theowl.octoburrs;
