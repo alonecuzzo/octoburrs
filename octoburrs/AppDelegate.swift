@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Octokit
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,7 +17,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-    // Override point for customization after application launch.
+
+    
+    let token = "e5e1263d0febf38385a334250e4afbf2dae51587"
+    let config = TokenConfiguration(token)
+    
+    Octokit(config).me() { response in
+      switch response {
+      case .success(let user):
+        print(user.login)
+      
+      case .failure(let error):
+        print(error)
+      }
+    }
+    
     return true
   }
 
