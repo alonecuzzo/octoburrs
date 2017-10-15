@@ -13,6 +13,9 @@
 		06B76EB11F93FFCB0021FC72 /* RepositoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B76EB01F93FFCB0021FC72 /* RepositoryViewController.swift */; };
 		06B76EB31F9408E40021FC72 /* OctoRepositoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B76EB21F9408E40021FC72 /* OctoRepositoryService.swift */; };
 		06B76EB51F9409600021FC72 /* RepositoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B76EB41F9409600021FC72 /* RepositoryViewModel.swift */; };
+		06B76EB71F9411320021FC72 /* IssuesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B76EB61F9411320021FC72 /* IssuesViewController.swift */; };
+		06B76EB91F9416840021FC72 /* OctoIssuesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B76EB81F9416840021FC72 /* OctoIssuesService.swift */; };
+		06B76EBB1F9416DC0021FC72 /* IssuesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B76EBA1F9416DC0021FC72 /* IssuesViewModel.swift */; };
 		06EEE31E1F93DFE20073A07D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06EEE31D1F93DFE20073A07D /* AppDelegate.swift */; };
 		06EEE3231F93DFE20073A07D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06EEE3211F93DFE20073A07D /* Main.storyboard */; };
 		06EEE3251F93DFE20073A07D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06EEE3241F93DFE20073A07D /* Assets.xcassets */; };
@@ -39,6 +42,9 @@
 		06B76EB01F93FFCB0021FC72 /* RepositoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryViewController.swift; sourceTree = "<group>"; };
 		06B76EB21F9408E40021FC72 /* OctoRepositoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OctoRepositoryService.swift; sourceTree = "<group>"; };
 		06B76EB41F9409600021FC72 /* RepositoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryViewModel.swift; sourceTree = "<group>"; };
+		06B76EB61F9411320021FC72 /* IssuesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuesViewController.swift; sourceTree = "<group>"; };
+		06B76EB81F9416840021FC72 /* OctoIssuesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OctoIssuesService.swift; sourceTree = "<group>"; };
+		06B76EBA1F9416DC0021FC72 /* IssuesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuesViewModel.swift; sourceTree = "<group>"; };
 		06EEE31A1F93DFE20073A07D /* octoburrs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = octoburrs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		06EEE31D1F93DFE20073A07D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		06EEE3221F93DFE20073A07D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -81,6 +87,7 @@
 			children = (
 				06B76EA81F93E8CB0021FC72 /* ProfileViewController.swift */,
 				06B76EB01F93FFCB0021FC72 /* RepositoryViewController.swift */,
+				06B76EB61F9411320021FC72 /* IssuesViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -90,6 +97,7 @@
 			children = (
 				06B76EAE1F93FC4F0021FC72 /* ProfileViewModel.swift */,
 				06B76EB41F9409600021FC72 /* RepositoryViewModel.swift */,
+				06B76EBA1F9416DC0021FC72 /* IssuesViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -99,6 +107,7 @@
 			children = (
 				06B76EAC1F93FA240021FC72 /* OctoProfileService.swift */,
 				06B76EB21F9408E40021FC72 /* OctoRepositoryService.swift */,
+				06B76EB81F9416840021FC72 /* OctoIssuesService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -388,12 +397,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06B76EBB1F9416DC0021FC72 /* IssuesViewModel.swift in Sources */,
+				06B76EB71F9411320021FC72 /* IssuesViewController.swift in Sources */,
 				06B76EB51F9409600021FC72 /* RepositoryViewModel.swift in Sources */,
 				06B76EAD1F93FA240021FC72 /* OctoProfileService.swift in Sources */,
 				06B76EA91F93E8CB0021FC72 /* ProfileViewController.swift in Sources */,
 				06B76EB31F9408E40021FC72 /* OctoRepositoryService.swift in Sources */,
 				06B76EAF1F93FC4F0021FC72 /* ProfileViewModel.swift in Sources */,
 				06EEE31E1F93DFE20073A07D /* AppDelegate.swift in Sources */,
+				06B76EB91F9416840021FC72 /* OctoIssuesService.swift in Sources */,
 				06B76EB11F93FFCB0021FC72 /* RepositoryViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

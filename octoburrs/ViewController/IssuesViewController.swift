@@ -1,31 +1,33 @@
 //
-//  RepositoryViewController.swift
+//  IssuesViewController.swift
 //  octoburrs
 //
 //  Created by Jabari Bell on 10/15/17.
 //  Copyright © 2017 theowl. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import Octokit
 import RxSwift
 import RxCocoa
 
 
-class RepositoryViewController: UIViewController {
+
+class IssuesViewController: UIViewController {
   
   //MARK: Property
   private let tableView = UITableView(frame: .zero)
-  private let viewModel: RepositoryViewModel
+  private let viewModel: IssuesViewModel
   private let disposeBag = DisposeBag()
-  private var repositories: Observable<[Repository]> { return viewModel.repositories.asObservable() }
-  private let cellIdentifier = "afsdf"
+  private var issues: Observable<[Issue]> { return viewModel.issues.asObservable() }
+  private let cellIdentifier = "IssuesViewController.cellIdentifier"
+  private let repoName: String
   
   
   //MARK: Method
-  required init(viewModel: RepositoryViewModel) {
+  required init(viewModel: IssuesViewModel, repoName: String) {
     self.viewModel = viewModel
+    self.repoName = repoName
     super.init(nibName: nil, bundle: nil)
   }
   
@@ -45,21 +47,17 @@ class RepositoryViewController: UIViewController {
     tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
     view.addSubview(tableView)
     
-    viewModel.fetchRepositories()
+    viewModel.fetchIssues(repoName)
     
-    repositories.bind(to: tableView.rx.items) { tv, row, repository in
+    issues.bind(to: tableView.rx.items) { tv, row, issue in
       let cell = tv.dequeueReusableCell(withIdentifier: self.cellIdentifier)!
-      cell.textLabel?.text = repository.name
+      cell.textLabel?.text = issue.title
       cell.selectionStyle = .none
       return cell
-    }.disposed(by: disposeBag)
+      }.disposed(by: disposeBag)
     
-    tableView.rx.modelSelected(Repository.self).subscribe(onNext: { [weak self] repository in
-      guard let repoName = repository.name else { return }
-      let service = OctoIssuesService("e5e1263d0febf38385a334250e4afbf2dae51587")
-      let vm = IssuesViewModel(service: service)
-      let ivc = IssuesViewController(viewModel: vm, repoName: repoName)
-      self?.navigationController?.pushViewController(ivc, animated: true)
+    tableView.rx.modelSelected(Issue.self).subscribe(onNext: { issue in
+      
     }).disposed(by: disposeBag)
   }
 }
