@@ -38,5 +38,20 @@ class ProfileViewController: UIViewController {
       guard user.id > 0 else { return }
       print(user.login)
     }).disposed(by: disposeBag)
+    
+    
+    //add a button that's going to pop the repo vc flow
+    let repoButton = UIButton(frame: CGRect(x: 10, y: 10, width: 300, height: 100))
+    view.addSubview(repoButton)
+    repoButton.addTarget(self, action: #selector(repoButtonTapped), for: .touchUpInside)
+    repoButton.backgroundColor = .white
+  }
+  
+  @objc func repoButtonTapped(sender: Any?) {
+    let repoService = OctoRepositoryService(viewModel.token)
+    let vm = RepositoryViewModel(service: repoService)
+    let rvc = RepositoryViewController(viewModel: vm)
+    let nvc = UINavigationController(rootViewController: rvc)
+    present(nvc, animated: true)
   }
 }

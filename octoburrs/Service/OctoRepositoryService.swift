@@ -1,5 +1,5 @@
 //
-//  OctoProfileService.swift
+//  OctoRepositoryService.swift
 //  octoburrs
 //
 //  Created by Jabari Bell on 10/15/17.
@@ -11,19 +11,17 @@ import Octokit
 import RxSwift
 
 
-/// Type that is responsible for providing an Observable<User>
-protocol ProfileFetchable {
-  var token: String { get }
-  func fetchProfile() -> Observable<User>
+/// Type that is responsible for providing an Observable<[Repository]>
+protocol RepositoryFetchable {
+  func fetchRepositories() -> Observable<[Repository]>
 }
 
 
-/// Concrete imlpementation that is responsible for retrieving User data
-struct OctoProfileService: ProfileFetchable {
+/// Concrete service that gets repositories for a User
+struct OctoRepositoryService: RepositoryFetchable {
   
   //MARK: Property
   private let config: TokenConfiguration
-  var token: String { return config.accessToken ?? "" }
   
   
   //MARK: Method
@@ -31,12 +29,12 @@ struct OctoProfileService: ProfileFetchable {
     self.config = TokenConfiguration(token)
   }
   
-  func fetchProfile() -> Observable<User> {
+  func fetchRepositories() -> Observable<[Repository]> {
     return Observable.create { observer -> Disposable in
-      Octokit(self.config).me() { response in
+      Octokit(self.config).repositories() { response in
         switch response {
-        case .success(let user):
-          observer.on(.next(user))
+        case .success(let repositories):
+          observer.on(.next(repositories))
           observer.on(.completed)
         case .failure(let error):
           observer.onError(error)
