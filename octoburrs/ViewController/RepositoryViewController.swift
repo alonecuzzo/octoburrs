@@ -10,9 +10,7 @@ import Foundation
 import UIKit
 import Octokit
 import RxSwift
-
-
-
+import RxCocoa
 
 
 class RepositoryViewController: UIViewController {
@@ -21,6 +19,8 @@ class RepositoryViewController: UIViewController {
   private let tableView = UITableView(frame: .zero)
   private let viewModel: RepositoryViewModel
   private let disposeBag = DisposeBag()
+  private var repositories: Observable<[Repository]> { return viewModel.repositories.asObservable() }
+  private let cellIdentifier = "afsdf"
   
   
   //MARK: Method
@@ -33,17 +33,25 @@ class RepositoryViewController: UIViewController {
     fatalError("init(coder:) has not been implemented")
   }
   
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    tableView.frame = view.bounds
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .orange
     
+    tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+    view.addSubview(tableView)
+    
     viewModel.fetchRepositories()
     
-    viewModel.repositories.asObservable().subscribe(onNext: { repositories in
-      print(repositories)
-    }).disposed(by: disposeBag)
-    
-    
+    repositories.bind(to: tableView.rx.items) { tv, row, repository in
+      let cell = tv.dequeueReusableCell(withIdentifier: self.cellIdentifier)!
+      cell.textLabel?.text = repository.fullName
+      cell.selectionStyle = .none
+      return cell
+    }.disposed(by: disposeBag)
   }
 }
