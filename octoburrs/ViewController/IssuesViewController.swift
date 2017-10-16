@@ -40,6 +40,11 @@ class IssuesViewController: UIViewController {
     tableView.frame = view.bounds
   }
   
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    viewModel.fetchIssues(repoName)
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .orange
@@ -48,8 +53,6 @@ class IssuesViewController: UIViewController {
     
     tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
     view.addSubview(tableView)
-    
-    viewModel.fetchIssues(repoName)
     
     issues.bind(to: tableView.rx.items) { tv, row, issue in
       let cell = tv.dequeueReusableCell(withIdentifier: self.cellIdentifier)!
@@ -64,7 +67,10 @@ class IssuesViewController: UIViewController {
   }
   
   @objc func addButtonTapped(sender: Any?) {
-    let vc = CreateIssueViewController()
+    //TODO: remove and add token by di
+    let service = CreateIssueService("e5e1263d0febf38385a334250e4afbf2dae51587")
+    let vm = CreateIssueViewModel(service: service)
+    let vc = CreateIssueViewController(viewModel: vm, repoName: repoName)
     navigationController?.pushViewController(vc, animated: true)
   }
 }

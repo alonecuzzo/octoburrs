@@ -51,7 +51,12 @@ class ProfileViewController: UIViewController {
     let repoService = OctoRepositoryService(viewModel.token)
     let vm = RepositoryViewModel(service: repoService)
     let rvc = RepositoryViewController(viewModel: vm)
+    rvc.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.plain, target: self, action: #selector(dismissRepoVc))
     let nvc = UINavigationController(rootViewController: rvc)
     present(nvc, animated: true)
+  }
+  
+  @objc func dismissRepoVc(sender: Any?) {
+    dismiss(animated: true)
   }
 }
