@@ -12,6 +12,7 @@ import RxSwift
 import RxCocoa
 
 
+
 class IssuesViewController: UIViewController {
   
   //MARK: Property
@@ -51,13 +52,23 @@ class IssuesViewController: UIViewController {
     
     navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(addButtonTapped))
     
-    tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+    tableView.register(IssueTableViewCell.self, forCellReuseIdentifier: cellIdentifier)
     view.addSubview(tableView)
     
     issues.bind(to: tableView.rx.items) { tv, row, issue in
-      let cell = tv.dequeueReusableCell(withIdentifier: self.cellIdentifier)!
+      let cell = tv.dequeueReusableCell(withIdentifier: self.cellIdentifier) as! IssueTableViewCell
       cell.textLabel?.text = issue.title
       cell.selectionStyle = .none
+      
+      guard let issueState = issue.state else { cell.state = .open; return cell }
+      
+      switch issueState {
+      case .Closed:
+        cell.state = .closed
+      case .Open, .All:
+        cell.state = .open
+      }
+      
       return cell
       }.disposed(by: disposeBag)
     

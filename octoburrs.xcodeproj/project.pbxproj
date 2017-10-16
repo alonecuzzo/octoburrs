@@ -19,6 +19,7 @@
 		06B76EBD1F941AE90021FC72 /* CreateIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B76EBC1F941AE90021FC72 /* CreateIssueViewController.swift */; };
 		06B76EBF1F94D4F40021FC72 /* CreateIssueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B76EBE1F94D4F40021FC72 /* CreateIssueViewModel.swift */; };
 		06B76EC11F94D52B0021FC72 /* CreateIssueService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B76EC01F94D52B0021FC72 /* CreateIssueService.swift */; };
+		06B76EC41F94DCF60021FC72 /* IssueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B76EC31F94DCF60021FC72 /* IssueTableViewCell.swift */; };
 		06EEE31E1F93DFE20073A07D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06EEE31D1F93DFE20073A07D /* AppDelegate.swift */; };
 		06EEE3231F93DFE20073A07D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06EEE3211F93DFE20073A07D /* Main.storyboard */; };
 		06EEE3251F93DFE20073A07D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06EEE3241F93DFE20073A07D /* Assets.xcassets */; };
@@ -51,6 +52,7 @@
 		06B76EBC1F941AE90021FC72 /* CreateIssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIssueViewController.swift; sourceTree = "<group>"; };
 		06B76EBE1F94D4F40021FC72 /* CreateIssueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIssueViewModel.swift; sourceTree = "<group>"; };
 		06B76EC01F94D52B0021FC72 /* CreateIssueService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIssueService.swift; sourceTree = "<group>"; };
+		06B76EC31F94DCF60021FC72 /* IssueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTableViewCell.swift; sourceTree = "<group>"; };
 		06EEE31A1F93DFE20073A07D /* octoburrs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = octoburrs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		06EEE31D1F93DFE20073A07D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		06EEE3221F93DFE20073A07D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -121,6 +123,14 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		06B76EC21F94DCDD0021FC72 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				06B76EC31F94DCF60021FC72 /* IssueTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		06EEE3111F93DFE20073A07D = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				06B76EAB1F93FA120021FC72 /* Service */,
+				06B76EC21F94DCDD0021FC72 /* View */,
 				06B76EAA1F93E9C80021FC72 /* ViewModel */,
 				06B76EA71F93E8A40021FC72 /* ViewController */,
 				06EEE31D1F93DFE20073A07D /* AppDelegate.swift */,
@@ -421,6 +432,7 @@
 				06EEE31E1F93DFE20073A07D /* AppDelegate.swift in Sources */,
 				06B76EB91F9416840021FC72 /* OctoIssuesService.swift in Sources */,
 				06B76EB11F93FFCB0021FC72 /* RepositoryViewController.swift in Sources */,
+				06B76EC41F94DCF60021FC72 /* IssueTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
