@@ -13,7 +13,18 @@ import Octokit
 
 
 enum IssueMode {
-  case edit, view
+  case edit, view, new
+  
+  var title: String {
+    switch self {
+    case .edit:
+      return "Edit Issue"
+    case .view:
+      return "View Issue"
+    case .new:
+      return "New Issue"
+    }
+  }
 }
 
 
@@ -23,20 +34,20 @@ class CreateIssueViewController: UIViewController {
   private let tableView = UITableView(frame: .zero, style: .grouped)
   private let issueTitleTextField = UITextField(frame: .zero)
   private let issueBodyTextField = UITextField(frame: .zero)
-  private let viewModel: CreateIssueViewModel
-  private let repoName: String
+  private let viewModel: IssueViewModel
   private let disposeBag = DisposeBag()
+  private let repoName: String
   private let cellIdentifier = "CreateIssueViewController.cellIdentifier"
   private let createIssueButton = UIButton(frame: .zero)
-  private let issueMode: IssueMode
+  private let issueMode: Variable<IssueMode>
   private let issue: Issue?
   
   
   //MARK: Method
-  init(viewModel: CreateIssueViewModel, repoName: String, issueMode: IssueMode, issue: Issue?) {
+  init(viewModel: IssueViewModel, repoName: String, issueMode: IssueMode, issue: Issue?) {
     self.viewModel = viewModel
     self.repoName = repoName
-    self.issueMode = issueMode
+    self.issueMode = Variable(issueMode)
     self.issue = issue
     super.init(nibName: nil, bundle: nil)
   }
@@ -47,13 +58,39 @@ class CreateIssueViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    navigationItem.title = "New Issue"
     setup()
   }
   
   private func setup() {
+    setupModeBindings()
     setupTableView()
-    setupButton()
+    setupCreateIssueButton()
+    issueMode.value = issueMode.value //send new event down the pipe
+  }
+  
+  private func setupModeBindings() {
+    issueMode.asObservable().subscribe(onNext: { [weak self] mode in
+      guard let strongSelf = self else { return }
+      strongSelf.navigationItem.title = mode.title
+      switch mode {
+      case .new, .edit:
+        strongSelf.issueTitleTextField.isUserInteractionEnabled = true
+        strongSelf.issueBodyTextField.isUserInteractionEnabled = true
+        strongSelf.createIssueButton.isHidden = false
+        strongSelf.navigationItem.rightBarButtonItem = nil
+      case .view:
+        strongSelf.createIssueButton.isHidden = true
+        strongSelf.setupEditButton()
+      }
+    }).disposed(by: disposeBag)
+  }
+  
+  private func setupEditButton() {
+    navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.plain, target: self, action: #selector(editTapped))
+  }
+  
+  @objc private func editTapped() {
+    issueMode.value = .edit
   }
   
   private func setupTableView() {
@@ -64,7 +101,7 @@ class CreateIssueViewController: UIViewController {
     }
     tableView.rowHeight = 40
     
-    viewModel.menuItems.asObservable().bind(to: tableView.rx.items) { [weak self] tv, row, item in
+    _ = viewModel.menuItems.asObservable().bind(to: tableView.rx.items) { [weak self] tv, row, item in
       guard let strongSelf = self else { return UITableViewCell() }
       switch row {
       case 0:
@@ -76,20 +113,21 @@ class CreateIssueViewController: UIViewController {
       }
     }
     
-    setupBindingsFor(issueTitleTextField, withDefaultString: viewModel.menuItems.value.first!)
-    setupBindingsFor(issueBodyTextField, withDefaultString: viewModel.menuItems.value[1])
-    
-    switch issueMode {
-    case .edit:
+    switch issueMode.value {
+    case .new, .edit:
       issueTitleTextField.isUserInteractionEnabled = true
       issueBodyTextField.isUserInteractionEnabled = true
+      setupBindingsFor(issueTitleTextField, withDefaultString: viewModel.menuItems.value.first!)
+      setupBindingsFor(issueBodyTextField, withDefaultString: viewModel.menuItems.value[1])
     case .view:
       issueTitleTextField.isUserInteractionEnabled = false
       issueBodyTextField.isUserInteractionEnabled = false
+      guard let issue = issue else { return }
+      viewModel.menuItems.value = [issue.title ?? "", issue.body ?? ""]
     }
   }
   
-  private func setupButton() {
+  private func setupCreateIssueButton() {
     view.addSubview(createIssueButton)
     createIssueButton.snp.makeConstraints { make in
       make.top.equalTo(200)
@@ -97,13 +135,12 @@ class CreateIssueViewController: UIViewController {
       make.width.equalTo(180)
       make.centerX.equalTo(view)
     }
-    createIssueButton.setTitle("Save New Issue", for: .normal)
+    createIssueButton.setTitle("Save Issue", for: .normal)
     createIssueButton.backgroundColor = UIColor.darkGray
     createIssueButton.layer.cornerRadius = 5
     createIssueButton.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] _ in
       guard let strongSelf = self else { return }
       strongSelf.viewModel.createIssueForRepositoryNamed(strongSelf.repoName, title: strongSelf.issueTitleTextField.text ?? "", body: strongSelf.issueBodyTextField.text ?? "")
-       print("tapped with repo name" + strongSelf.repoName)
     }).disposed(by: disposeBag)
     
     viewModel.createdIssue.asObservable().subscribe(onNext: { [weak self] issue in
@@ -129,6 +166,7 @@ struct CreateIssueCellFactory {
   static func makeTableViewCellFor(tableView: UITableView, item: String, cellIdentifier: String, textField: UITextField) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)!
     cell.contentView.addSubview(textField)
+    cell.selectionStyle = .none
     textField.text = item
     textField.snp.makeConstraints({ make in
       make.top.bottom.equalTo(cell.contentView)

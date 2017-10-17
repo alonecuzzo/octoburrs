@@ -1,5 +1,5 @@
 //
-//  CreateIssueService.swift
+//  OctoIssueService.swift
 //  octoburrs
 //
 //  Created by Jabari Bell on 10/16/17.
@@ -11,7 +11,7 @@ import RxSwift
 import Octokit
 
 
-struct CreateIssueService {
+struct OctoIssueService {
   
   //MARK: Property
   private let config: TokenConfiguration

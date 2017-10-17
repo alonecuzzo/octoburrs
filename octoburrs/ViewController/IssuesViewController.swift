@@ -12,7 +12,6 @@ import RxSwift
 import RxCocoa
 
 
-
 class IssuesViewController: UIViewController {
   
   //MARK: Property
@@ -72,15 +71,19 @@ class IssuesViewController: UIViewController {
       return cell
       }.disposed(by: disposeBag)
     
-    tableView.rx.modelSelected(Issue.self).subscribe(onNext: { issue in
-
+    tableView.rx.modelSelected(Issue.self).subscribe(onNext: { [weak self] issue in
+      guard let strongSelf = self else { return }
+      let service = OctoIssueService(strongSelf.viewModel.token)
+      let vm = IssueViewModel(service: service)
+      let issueVC = CreateIssueViewController(viewModel: vm, repoName: strongSelf.repoName, issueMode: .view, issue: issue)
+      strongSelf.navigationController?.pushViewController(issueVC, animated: true)
     }).disposed(by: disposeBag)
   }
   
   @objc func addButtonTapped(sender: Any?) {
-    let service = CreateIssueService(viewModel.token)
-    let vm = CreateIssueViewModel(service: service)
-    let vc = CreateIssueViewController(viewModel: vm, repoName: repoName, issueMode: .edit, issue: nil)
+    let service = OctoIssueService(viewModel.token)
+    let vm = IssueViewModel(service: service)
+    let vc = CreateIssueViewController(viewModel: vm, repoName: repoName, issueMode: .new, issue: nil)
     navigationController?.pushViewController(vc, animated: true)
   }
 }
