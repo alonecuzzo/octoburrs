@@ -12,7 +12,7 @@ import RxSwift
 
 
 /// ViewModel that provides backing data for a Profile driven view
-struct ProfileViewModel {
+struct ProfileViewModel: Tokenable {
   
   //MARK: Property
   let user = Variable(User(["": "" as AnyObject]))

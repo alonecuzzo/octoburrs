@@ -12,8 +12,7 @@ import RxSwift
 
 
 /// Type that is responsible for providing an Observable<User>
-protocol ProfileFetchable {
-  var token: String { get }
+protocol ProfileFetchable: Tokenable {
   func fetchProfile() -> Observable<User>
 }
 
@@ -23,11 +22,14 @@ struct OctoProfileService: ProfileFetchable {
   
   //MARK: Property
   private let config: TokenConfiguration
-  var token: String { return config.accessToken ?? "" }
+  private let _token: String
+  
+  var token: String { return _token }
   
   
   //MARK: Method
   init(_ token: String) {
+    self._token = token
     self.config = TokenConfiguration(token)
   }
   

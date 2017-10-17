@@ -34,7 +34,7 @@ struct OctoIssuesService: IssuesFetchable {
   
   func fetchIssues(_ repoNamed: String) -> Observable<[Issue]> {
     return Observable.create { observer -> Disposable in
-      Octokit(self.config).issues(owner: "alonecuzzo", repository: repoNamed) { response in
+      _ = Octokit(self.config).issues(owner: "alonecuzzo", repository: repoNamed) { response in
         switch response {
         case .success(let issues):
           observer.on(.next(issues))
