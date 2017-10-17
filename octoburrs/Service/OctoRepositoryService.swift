@@ -33,7 +33,7 @@ struct OctoRepositoryService: RepositoryFetchable {
   
   func fetchRepositories() -> Observable<[Repository]> {
     return Observable.create { observer -> Disposable in
-      Octokit(self.config).repositories() { response in
+      _ = Octokit(self.config).repositories() { response in
         switch response {
         case .success(let repositories):
           observer.on(.next(repositories))

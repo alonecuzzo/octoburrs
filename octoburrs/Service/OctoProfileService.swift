@@ -35,7 +35,7 @@ struct OctoProfileService: ProfileFetchable {
   
   func fetchProfile() -> Observable<User> {
     return Observable.create { observer -> Disposable in
-      Octokit(self.config).me() { response in
+      _ = Octokit(self.config).me() { response in
         switch response {
         case .success(let user):
           observer.on(.next(user))
