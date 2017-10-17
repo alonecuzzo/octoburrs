@@ -139,11 +139,11 @@ class IssueViewController: UIViewController {
     createIssueButton.backgroundColor = UIColor.githubBlue
     createIssueButton.layer.cornerRadius = 5
     createIssueButton.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] _ in
-      guard let strongSelf = self,
-            let issue = strongSelf.issue else { return }
+      guard let strongSelf = self else { return }
       
       switch strongSelf.issueMode.value {
       case .edit, .view:
+        guard let issue = strongSelf.issue else { return }
         strongSelf.viewModel.updateIssueForRepositoryNamed(strongSelf.repoName, title: strongSelf.issueTitleTextField.text ?? "", body: strongSelf.issueBodyTextField.text ?? "", issueNumber: issue.number ?? 0)
       case .new:
         strongSelf.viewModel.createIssueForRepositoryNamed(strongSelf.repoName, title: strongSelf.issueTitleTextField.text ?? "", body: strongSelf.issueBodyTextField.text ?? "")
