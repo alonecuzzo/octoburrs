@@ -16,22 +16,32 @@ PODS:
   - SnapKit (4.0.0)
 
 DEPENDENCIES:
-  - OctoKit.swift (~> 0.7)
+  - OctoKit.swift (from `https://github.com/alonecuzzo/octokit.swift`, branch `feature/make_urls_public`)
   - RxDataSources (= 3.0.0-rc.0)
   - RxSwift (= 4.0.0-rc.0)
   - SDWebImage (~> 4.1)
   - SnapKit (~> 4.0)
 
+EXTERNAL SOURCES:
+  OctoKit.swift:
+    :branch: feature/make_urls_public
+    :git: https://github.com/alonecuzzo/octokit.swift
+
+CHECKOUT OPTIONS:
+  OctoKit.swift:
+    :commit: 1d28ee79797077ddf408541243c19d9da54405c8
+    :git: https://github.com/alonecuzzo/octokit.swift
+
 SPEC CHECKSUMS:
   Differentiator: 1e7575c5613fc4e72659d9d2d0867ff5bc4dbac5
   NBNRequestKit: 70d514748747aca66e2e2ed17340f91d5ed6d1d4
-  OctoKit.swift: 0da8816eb3ea02d0eaebf10527bef5e26c571676
+  OctoKit.swift: 57d6221f6b638ee9c47d1b3c7da0628a07f08d5b
   RxCocoa: 62457355be73369670fbdf053a79a491552b64ed
   RxDataSources: db58285ada7c9a6d97e93643acc16a8e0c4ff669
   RxSwift: 1dd09ceb11531c39adff4efe23556b1484e16967
   SDWebImage: cb6f9f266a9977741efcbc21e618e8be3734c774
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
 
-PODFILE CHECKSUM: e89d96ee0e4e656a2551b7ca50f6b1e668132977
+PODFILE CHECKSUM: ca1b40db456fd1732725a24bdf4b49bd552e62f5
 
 COCOAPODS: 1.3.1

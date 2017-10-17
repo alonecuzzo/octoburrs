@@ -6,7 +6,7 @@ target 'octoburrs' do
   use_frameworks!
 
   # Pods for octoburrs
-  pod 'OctoKit.swift', '~> 0.7'
+  pod 'OctoKit.swift', :git => 'https://github.com/alonecuzzo/octokit.swift', :branch => 'feature/make_urls_public'
   pod 'RxSwift', '4.0.0-rc.0'
   pod 'RxDataSources', '3.0.0-rc.0'
   pod 'SnapKit', '~> 4.0'
