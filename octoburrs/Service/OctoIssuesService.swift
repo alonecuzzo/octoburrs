@@ -35,7 +35,6 @@ struct OctoIssuesService: IssuesFetchable {
         switch response {
         case .success(let issues):
           observer.on(.next(issues))
-          observer.on(.completed)
         case .failure(let error):
           observer.onError(error)
         }
