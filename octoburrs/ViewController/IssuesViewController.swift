@@ -75,7 +75,7 @@ class IssuesViewController: UIViewController {
       guard let strongSelf = self else { return }
       let service = OctoIssueService(strongSelf.viewModel.token)
       let vm = IssueViewModel(service: service)
-      let issueVC = CreateIssueViewController(viewModel: vm, repoName: strongSelf.repoName, issueMode: .view, issue: issue)
+      let issueVC = IssueViewController(viewModel: vm, repoName: strongSelf.repoName, issueMode: .view, issue: issue)
       strongSelf.navigationController?.pushViewController(issueVC, animated: true)
     }).disposed(by: disposeBag)
   }
@@ -83,7 +83,7 @@ class IssuesViewController: UIViewController {
   @objc func addButtonTapped(sender: Any?) {
     let service = OctoIssueService(viewModel.token)
     let vm = IssueViewModel(service: service)
-    let vc = CreateIssueViewController(viewModel: vm, repoName: repoName, issueMode: .new, issue: nil)
+    let vc = IssueViewController(viewModel: vm, repoName: repoName, issueMode: .new, issue: nil)
     navigationController?.pushViewController(vc, animated: true)
   }
 }

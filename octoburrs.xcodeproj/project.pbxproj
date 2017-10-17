@@ -16,7 +16,7 @@
 		06B76EB71F9411320021FC72 /* IssuesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B76EB61F9411320021FC72 /* IssuesViewController.swift */; };
 		06B76EB91F9416840021FC72 /* OctoIssuesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B76EB81F9416840021FC72 /* OctoIssuesService.swift */; };
 		06B76EBB1F9416DC0021FC72 /* IssuesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B76EBA1F9416DC0021FC72 /* IssuesViewModel.swift */; };
-		06B76EBD1F941AE90021FC72 /* CreateIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B76EBC1F941AE90021FC72 /* CreateIssueViewController.swift */; };
+		06B76EBD1F941AE90021FC72 /* IssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B76EBC1F941AE90021FC72 /* IssueViewController.swift */; };
 		06B76EBF1F94D4F40021FC72 /* IssueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B76EBE1F94D4F40021FC72 /* IssueViewModel.swift */; };
 		06B76EC11F94D52B0021FC72 /* OctoIssueService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B76EC01F94D52B0021FC72 /* OctoIssueService.swift */; };
 		06B76EC41F94DCF60021FC72 /* IssueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B76EC31F94DCF60021FC72 /* IssueTableViewCell.swift */; };
@@ -50,7 +50,7 @@
 		06B76EB61F9411320021FC72 /* IssuesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuesViewController.swift; sourceTree = "<group>"; };
 		06B76EB81F9416840021FC72 /* OctoIssuesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OctoIssuesService.swift; sourceTree = "<group>"; };
 		06B76EBA1F9416DC0021FC72 /* IssuesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuesViewModel.swift; sourceTree = "<group>"; };
-		06B76EBC1F941AE90021FC72 /* CreateIssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIssueViewController.swift; sourceTree = "<group>"; };
+		06B76EBC1F941AE90021FC72 /* IssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueViewController.swift; sourceTree = "<group>"; };
 		06B76EBE1F94D4F40021FC72 /* IssueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueViewModel.swift; sourceTree = "<group>"; };
 		06B76EC01F94D52B0021FC72 /* OctoIssueService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OctoIssueService.swift; sourceTree = "<group>"; };
 		06B76EC31F94DCF60021FC72 /* IssueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTableViewCell.swift; sourceTree = "<group>"; };
@@ -95,7 +95,7 @@
 		06B76EA71F93E8A40021FC72 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				06B76EBC1F941AE90021FC72 /* CreateIssueViewController.swift */,
+				06B76EBC1F941AE90021FC72 /* IssueViewController.swift */,
 				06B76EB61F9411320021FC72 /* IssuesViewController.swift */,
 				06B76EA81F93E8CB0021FC72 /* ProfileViewController.swift */,
 				06B76EB01F93FFCB0021FC72 /* RepositoryViewController.swift */,
@@ -430,7 +430,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				06B76EBD1F941AE90021FC72 /* CreateIssueViewController.swift in Sources */,
+				06B76EBD1F941AE90021FC72 /* IssueViewController.swift in Sources */,
 				06B76EBB1F9416DC0021FC72 /* IssuesViewModel.swift in Sources */,
 				06B76EB71F9411320021FC72 /* IssuesViewController.swift in Sources */,
 				06B76EB51F9409600021FC72 /* RepositoryViewModel.swift in Sources */,

@@ -25,11 +25,24 @@ struct OctoIssueService {
   
   func createIssueFor(_ repoNamed: String, title: String, body: String) -> Observable<Issue> {
     return Observable.create { observer -> Disposable in
-      Octokit(self.config).postIssue(owner: "alonecuzzo", repository: repoNamed, title: title, body: body, assignee: "alonecuzzo") { response in
+      _ = Octokit(self.config).postIssue(owner: "alonecuzzo", repository: repoNamed, title: title, body: body, assignee: "alonecuzzo") { response in
         switch response {
         case .success(let issue):
           observer.on(.next(issue))
-          observer.on(.completed)
+        case .failure(let error):
+          observer.onError(error)
+        }
+      }
+      return Disposables.create()
+    }
+  }
+  
+  func updateIssue(_ repoNamed: String, title: String, body: String, issueNumber: Int) -> Observable<Issue> {
+    return Observable.create { observer -> Disposable in
+      _ = Octokit(self.config).patchIssue(owner: "alonecuzzo", repository: repoNamed, number: issueNumber, title: title, body: body, assignee: "alonecuzzo", state: .Open) { response in
+        switch response {
+        case .success(let issue):
+          observer.on(.next(issue))
         case .failure(let error):
           observer.onError(error)
         }

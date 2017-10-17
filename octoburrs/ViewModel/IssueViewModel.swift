@@ -15,7 +15,7 @@ struct IssueViewModel {
   
   //MARK: Property
   let menuItems = Variable(["Enter Issue Title", "Enter Issue Body"])
-  let createdIssue: Variable<Issue?> = Variable(nil)
+  let issue: Variable<Issue?> = Variable(nil)
   private let service: OctoIssueService
   private let disposeBag = DisposeBag()
   
@@ -27,21 +27,15 @@ struct IssueViewModel {
   
   func createIssueForRepositoryNamed(_ repoName: String, title: String, body: String) {
     service.createIssueFor(repoName, title: title, body: body).subscribe(onNext: { issue in
-      self.createdIssue.value = issue
+      self.issue.value = issue
     }).disposed(by: disposeBag)
   }
-  
-//  Octokit(config).patchIssue("owner", repository: "repo", number: 1347, title: "Found a bug", body: "I'm having a problem with this.", assignee: "octocat", state: .Closed) { response in
-//  switch response {
-//  case .success(let issue):
-//  // do something with the issue
-//  case .failure:
-//  // handle any errors
-//  }
-//  }
+
   
   func updateIssueForRepositoryNamed(_ repoName: String, title: String, body: String, issueNumber: Int) {
-    
+    service.updateIssue(repoName, title: title, body: body, issueNumber: issueNumber).subscribe(onNext: { issue in
+      self.issue.value = issue
+    }).disposed(by: disposeBag)
   }
   
 }

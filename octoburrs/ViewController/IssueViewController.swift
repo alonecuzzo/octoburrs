@@ -28,7 +28,7 @@ enum IssueMode {
 }
 
 
-class CreateIssueViewController: UIViewController {
+class IssueViewController: UIViewController {
   
   //MARK: Property
   private let tableView = UITableView(frame: .zero, style: .grouped)
@@ -37,7 +37,7 @@ class CreateIssueViewController: UIViewController {
   private let viewModel: IssueViewModel
   private let disposeBag = DisposeBag()
   private let repoName: String
-  private let cellIdentifier = "CreateIssueViewController.cellIdentifier"
+  private let cellIdentifier = "IssueViewController.cellIdentifier"
   private let createIssueButton = UIButton(frame: .zero)
   private let issueMode: Variable<IssueMode>
   private let issue: Issue?
@@ -143,7 +143,7 @@ class CreateIssueViewController: UIViewController {
       strongSelf.viewModel.createIssueForRepositoryNamed(strongSelf.repoName, title: strongSelf.issueTitleTextField.text ?? "", body: strongSelf.issueBodyTextField.text ?? "")
     }).disposed(by: disposeBag)
     
-    viewModel.createdIssue.asObservable().subscribe(onNext: { [weak self] issue in
+    viewModel.issue.asObservable().subscribe(onNext: { [weak self] issue in
       guard issue != nil else { return }
       DispatchQueue.main.async {
         self?.navigationController?.popViewController(animated: true)
