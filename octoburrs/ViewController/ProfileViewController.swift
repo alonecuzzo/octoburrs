@@ -14,13 +14,6 @@ import SnapKit
 import SDWebImage
 
 
-//open var avatarURL: String?
-//open var name: String?
-//open var location: String?
-//open var numberOfPublicRepos: Int?
-
-
-
 /// ViewController that provides view for a Github user's profile
 class ProfileViewController: UIViewController {
   
@@ -41,24 +34,34 @@ class ProfileViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = .white
+    view.backgroundColor = UIColor(red:0.20, green:0.20, blue:0.20, alpha:1.0)
+    setup()
     viewModel.fetchUser()
+  }
+  
+  private func setup() {
     
-     let profileImageView = UIImageView(frame: .zero)
+    //init views
+    let profileImageView = UIImageView(frame: .zero)
+    let nameLabel = UILabel(frame: .zero)
+    let locationLabel = UILabel(frame: .zero)
+    let repoButton = UIButton(frame: .zero)
     
-    viewModel.user.asObservable().subscribe(onNext: { [weak self] user in
+    //binding
+    viewModel.user.asObservable().subscribe(onNext: { user in
       guard user.id > 0,
-        let strongSelf = self,
         let avatarURL = user.avatarURL else { return }
-      
       profileImageView.sd_setImage(with: URL(string: avatarURL), completed: nil)
-      
-      
+      DispatchQueue.main.async {
+        nameLabel.text = user.name?.uppercased()
+        locationLabel.text = user.location?.uppercased()
+        let numRepos = user.numberOfPublicRepos ?? 0
+        let repoButtonText = "\(numRepos) Public Repositories"
+        repoButton.setTitle(repoButtonText, for: .normal)
+      }
     }).disposed(by: disposeBag)
     
-    //profile imageview
-   
-    profileImageView.backgroundColor = .purple
+    //profile
     profileImageView.layer.cornerRadius = 5
     view.addSubview(profileImageView)
     profileImageView.snp.makeConstraints { make in
@@ -67,12 +70,37 @@ class ProfileViewController: UIViewController {
       make.top.equalTo(80)
     }
     
+    //name
+    view.addSubview(nameLabel)
+    nameLabel.textAlignment = .center
+    nameLabel.font = UIFont.boldSystemFont(ofSize: 40)
+    nameLabel.textColor = UIColor.githubLightGray
+    nameLabel.snp.makeConstraints { make in
+      make.left.right.equalTo(view)
+      make.top.equalTo(profileImageView.snp.bottom).offset(10)
+    }
     
-    //add a button that's going to pop the repo vc flow
-    let repoButton = UIButton(frame: CGRect(x: 10, y: 410, width: 300, height: 100))
+    //location
+    view.addSubview(locationLabel)
+    locationLabel.textAlignment = .center
+    locationLabel.textColor = UIColor.githubLightGray
+    locationLabel.font = UIFont.boldSystemFont(ofSize: 30)
+    locationLabel.snp.makeConstraints { make in
+      make.left.right.equalTo(view)
+      make.top.equalTo(nameLabel.snp.bottom).offset(10)
+    }
+    
+    //repositories button
     view.addSubview(repoButton)
+    repoButton.snp.makeConstraints { make in
+      make.left.right.equalTo(view).inset(20)
+      make.height.equalTo(50)
+      make.top.equalTo(locationLabel.snp.bottom).offset(10)
+      make.centerX.equalTo(view)
+    }
+    repoButton.layer.cornerRadius = 5
     repoButton.addTarget(self, action: #selector(repoButtonTapped), for: .touchUpInside)
-    repoButton.backgroundColor = .red
+    repoButton.backgroundColor = UIColor.githubBlue
   }
   
   @objc func repoButtonTapped(sender: Any?) {

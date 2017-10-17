@@ -136,7 +136,7 @@ class IssueViewController: UIViewController {
       make.centerX.equalTo(view)
     }
     createIssueButton.setTitle("Save Issue", for: .normal)
-    createIssueButton.backgroundColor = UIColor.darkGray
+    createIssueButton.backgroundColor = UIColor.githubBlue
     createIssueButton.layer.cornerRadius = 5
     createIssueButton.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: { [weak self] _ in
       guard let strongSelf = self,
