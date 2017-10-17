@@ -78,10 +78,9 @@ class IssuesViewController: UIViewController {
   }
   
   @objc func addButtonTapped(sender: Any?) {
-    //TODO: remove and add token by di
-    let service = CreateIssueService("e5e1263d0febf38385a334250e4afbf2dae51587")
+    let service = CreateIssueService(viewModel.token)
     let vm = CreateIssueViewModel(service: service)
-    let vc = CreateIssueViewController(viewModel: vm, repoName: repoName)
+    let vc = CreateIssueViewController(viewModel: vm, repoName: repoName, issueMode: .edit, issue: nil)
     navigationController?.pushViewController(vc, animated: true)
   }
 }

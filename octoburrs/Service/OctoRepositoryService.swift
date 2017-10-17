@@ -12,7 +12,7 @@ import RxSwift
 
 
 /// Type that is responsible for providing an Observable<[Repository]>
-protocol RepositoryFetchable {
+protocol RepositoryFetchable: Tokenable {
   func fetchRepositories() -> Observable<[Repository]>
 }
 
@@ -22,10 +22,12 @@ struct OctoRepositoryService: RepositoryFetchable {
   
   //MARK: Property
   private let config: TokenConfiguration
-  
+  private let _token: String
+  var token: String { return _token }
   
   //MARK: Method
   init(_ token: String) {
+    self._token = token
     self.config = TokenConfiguration(token)
   }
   

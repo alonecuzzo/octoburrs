@@ -12,6 +12,11 @@ import RxSwift
 import Octokit
 
 
+enum IssueMode {
+  case edit, view
+}
+
+
 class CreateIssueViewController: UIViewController {
   
   //MARK: Property
@@ -23,12 +28,16 @@ class CreateIssueViewController: UIViewController {
   private let disposeBag = DisposeBag()
   private let cellIdentifier = "CreateIssueViewController.cellIdentifier"
   private let createIssueButton = UIButton(frame: .zero)
+  private let issueMode: IssueMode
+  private let issue: Issue?
   
   
   //MARK: Method
-  init(viewModel: CreateIssueViewModel, repoName: String) {
+  init(viewModel: CreateIssueViewModel, repoName: String, issueMode: IssueMode, issue: Issue?) {
     self.viewModel = viewModel
     self.repoName = repoName
+    self.issueMode = issueMode
+    self.issue = issue
     super.init(nibName: nil, bundle: nil)
   }
   
@@ -69,6 +78,15 @@ class CreateIssueViewController: UIViewController {
     
     setupBindingsFor(issueTitleTextField, withDefaultString: viewModel.menuItems.value.first!)
     setupBindingsFor(issueBodyTextField, withDefaultString: viewModel.menuItems.value[1])
+    
+    switch issueMode {
+    case .edit:
+      issueTitleTextField.isUserInteractionEnabled = true
+      issueBodyTextField.isUserInteractionEnabled = true
+    case .view:
+      issueTitleTextField.isUserInteractionEnabled = false
+      issueBodyTextField.isUserInteractionEnabled = false
+    }
   }
   
   private func setupButton() {

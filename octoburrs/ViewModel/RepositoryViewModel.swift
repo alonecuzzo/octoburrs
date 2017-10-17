@@ -12,10 +12,11 @@ import Octokit
 
 
 /// ViewModel that backs a view of a User's Repositories
-struct RepositoryViewModel {
+struct RepositoryViewModel: Tokenable {
   
   //MARK: Property
   let repositories = Variable([Repository]())
+  var token: String { return service.token }
   
   private let service: RepositoryFetchable
   private let disposeBag = DisposeBag()

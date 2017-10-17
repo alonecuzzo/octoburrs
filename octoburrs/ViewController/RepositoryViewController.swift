@@ -55,12 +55,12 @@ class RepositoryViewController: UIViewController {
     }.disposed(by: disposeBag)
     
     tableView.rx.modelSelected(Repository.self).subscribe(onNext: { [weak self] repository in
+      guard let strongSelf = self else { return }
       guard let repoName = repository.name else { return }
-      //TODO: pass the token around - dont hardcode!
-      let service = OctoIssuesService("e5e1263d0febf38385a334250e4afbf2dae51587")
+      let service = OctoIssuesService(strongSelf.viewModel.token)
       let vm = IssuesViewModel(service: service)
       let ivc = IssuesViewController(viewModel: vm, repoName: repoName)
-      self?.navigationController?.pushViewController(ivc, animated: true)
+      strongSelf.navigationController?.pushViewController(ivc, animated: true)
     }).disposed(by: disposeBag)
   }
 }

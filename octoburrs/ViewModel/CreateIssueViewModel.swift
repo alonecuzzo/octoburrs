@@ -30,4 +30,5 @@ struct CreateIssueViewModel {
       self.createdIssue.value = issue
     }).disposed(by: disposeBag)
   }
+  
 }

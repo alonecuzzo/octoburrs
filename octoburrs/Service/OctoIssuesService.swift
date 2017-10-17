@@ -12,7 +12,7 @@ import RxSwift
 
 
 /// Type that is responsible for providing an Observable<[Issue]>
-protocol IssuesFetchable {
+protocol IssuesFetchable: Tokenable {
   func fetchIssues(_ repoNamed: String) -> Observable<[Issue]>
 }
 
@@ -22,10 +22,13 @@ struct OctoIssuesService: IssuesFetchable {
   
   //MARK: Property
   private let config: TokenConfiguration
+  private let _token: String
   
+  var token: String { return _token }
   
   //MARK: Method
   init(_ token: String) {
+    self._token = token
     self.config = TokenConfiguration(token)
   }
   

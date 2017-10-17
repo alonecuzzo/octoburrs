@@ -12,10 +12,11 @@ import RxSwift
 
 
 /// ViewModel that backs a view of a User's Repositories
-struct IssuesViewModel {
+struct IssuesViewModel: Tokenable {
   
   //MARK: Property
   let issues = Variable([Issue]())
+  var token: String { return service.token }
   
   private let service: IssuesFetchable
   private let disposeBag = DisposeBag()
